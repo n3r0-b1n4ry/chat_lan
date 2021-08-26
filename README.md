@@ -1,2 +1,9 @@
 # chat_lan
-java chat app from KMA AT16I
+About
+---
+java chat app
+this app operated on client-to-server
+
+Author
+---
+KMA AT16I
