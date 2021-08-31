@@ -12,7 +12,7 @@ public class FrameMain {
 		FrameMain Gui = new FrameMain();
 		Gui.bodyMain();
 	}
-	//--------------Frame main----------------
+	//--------------Main frame----------------
 	private void bodyMain() {
 		frameMain = new JFrame();
 		frameMain.setTitle("Chat Lan");
