@@ -1,0 +1,8 @@
+hướng dẫn chạy chatServer.jar
+- Cài đặt java jre version 1.8 (java 8)
+	+ check version bằng cách vào cmd/powershell chạy lệnh: java -version
+- chạy server bằng lệnh: java -jar chatServer.jar
+
+Note:
++ Nhớ allow firewall, vì app có bind port
++ binding port mặc định là 1234
