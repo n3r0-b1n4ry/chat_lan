@@ -1,0 +1,4 @@
+Thêm lib JSON vào eclipse:
+download json-simple-1.1.1.jar
+và làm theo method 1 trong link này
+https://www.geeksforgeeks.org/how-to-add-jar-file-to-classpath-in-java/
