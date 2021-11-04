@@ -1,0 +1,22 @@
+#backgrclient{
+    -fx-background-color: #696969;
+}
+#titlepane{
+    -fx-border-width: 0.2;
+    -fx-border-color: white;
+}
+#profilepane{
+    -fx-border-width: 0.2;
+    -fx-border-color: white;
+}
+#chattextarea{
+    -fx-border-color: black;
+    -fx-control-inner-background: #696969;
+    -fx-text-fill:white;
+}
+#vboxscrool{
+    -fx-background-color: #696969;
+}
+#vboxchat{
+    -fx-background-color: #696969;
+}
