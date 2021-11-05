@@ -1,11 +1,11 @@
 package chatlan.client;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class chatClient {
+	protected String username;
 	protected String server_name;
 	protected int server_port;
 	protected ServerSocket sess_recv;
@@ -21,6 +21,7 @@ public class chatClient {
 		try {
 //			open port to recv messages from server 
 			this.sess_recv = new ServerSocket(4567);
+			this.sess_recv.setSoTimeout(2000);
 
 //			start thread send and recv
 			this.send = new sendThread();
@@ -33,6 +34,15 @@ public class chatClient {
 			System.out.println(e);
 			return false;
 		}
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+//		this is username of client
+		this.username = username;
 	}
 
 	public String getServername() {
@@ -54,31 +64,54 @@ public class chatClient {
 	}
 
 //	feature function
-	public void sendMsg(String receiver, String message) {
+	public boolean login() {
+		Socket socket;
+		try {
+			socket = new Socket(this.server_name, this.server_port);
+			return this.send.sendData(socket, this.username, "login", "");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean logout() {
+		Socket socket;
+		try {
+			socket = new Socket(this.server_name, this.server_port);
+			this.send.sendData(socket, this.username, "logout", "");
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean sendMsg(String message) {
 //		params:
-//		String receiver is IP address of receiver
 //		String message is the content string to send
 		Socket socket;
 		try {
 			socket = new Socket(this.server_name, this.server_port);
-			this.send.sendData(socket, receiver, message);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			this.send.sendData(socket, this.username, "message", message);
+			return true;
+		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 
-	public ArrayList<String> recvMsg() {
+	public Hashtable<String, String> recvMsg() {
 //		result return:
-//		index 0 is IP address of sender
-//		index 1 is message
+//		key is IP address of sender
+//		value is message
 		try {
 			Socket socket = this.sess_recv.accept();
 			return this.recv.recvData(socket);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return new ArrayList<String>();
+		return new Hashtable<>();
 	}
 
 }

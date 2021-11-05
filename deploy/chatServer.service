@@ -1,0 +1,12 @@
+[Unit]
+After=network.service
+Description=chatServer
+
+[Service]
+Type=simple
+WorkingDirectory=/var/chatlan/
+ExecStart=/usr/bin/java -jar /var/chatlan/chatServer.jar
+User=root
+
+[Install]
+WantedBy=multi-user.target
