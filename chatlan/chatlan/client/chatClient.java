@@ -12,16 +12,16 @@ public class chatClient {
 	private sendThread send;
 	private recvThread recv;
 
-	public chatClient(String servername, int serverport) {
+	public chatClient(String servername, int serverport, String username) {
 		this.server_name = servername;
 		this.server_port = serverport;
+		this.username = username;
 	}
 
 	public boolean createConnection() {
 		try {
 //			open port to recv messages from server 
 			this.sess_recv = new ServerSocket(4567);
-			this.sess_recv.setSoTimeout(2000);
 
 //			start thread send and recv
 			this.send = new sendThread();
