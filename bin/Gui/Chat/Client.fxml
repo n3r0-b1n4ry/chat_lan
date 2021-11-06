@@ -113,7 +113,7 @@
                   </Pane>
                   <ScrollPane id="profilescroll" focusTraversable="false" hbarPolicy="NEVER" pannable="true" prefHeight="587.0" prefWidth="180.0" vbarPolicy="NEVER">
                      <content>
-                        <VBox id="vboxscrool" fx:id="vboxProfile" focusTraversable="true" minHeight="578.0" minWidth="180.0" />
+                        <VBox id="vboxscrool" fx:id="vboxProfile" focusTraversable="true" minHeight="587.0" minWidth="180.0" />
                      </content>
                   </ScrollPane>
                </children>

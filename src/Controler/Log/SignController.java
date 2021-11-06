@@ -1,6 +1,8 @@
 package Controler.Log;
 
 import java.io.IOException;
+
+import Connect.chatClient;
 import Controler.Chat.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,7 +51,10 @@ public class SignController {
             // ------- change user name from text field to user name of client---
             Client client = loader.getController();
             client.setUerName(userNameLog.getText().toString());
-
+            //-------------
+            
+            
+            
         }
 
     }
