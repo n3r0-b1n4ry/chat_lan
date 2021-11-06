@@ -75,15 +75,13 @@ public class chatClient {
 		}
 	}
 
-	public boolean logout() {
+	public void logout() {
 		Socket socket;
 		try {
 			socket = new Socket(this.server_name, this.server_port);
 			this.send.sendData(socket, this.username, "logout", "");
-			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
 		}
 	}
 
