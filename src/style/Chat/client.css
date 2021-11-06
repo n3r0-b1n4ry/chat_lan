@@ -1,0 +1,26 @@
+#backgroundSign{
+    -fx-background-color: #696969;
+}
+#titlepane{
+    -fx-border-width: 0.2;
+    -fx-border-color: white;
+}
+#profilepane{
+    -fx-border-width: 0.2;
+    -fx-border-color: white;
+}
+#chattextarea{
+    -fx-border-style: solid;
+    -fx-border-color: burlywood;
+    -fx-control-inner-background: #696969;
+    -fx-text-fill:white;
+}
+#vboxscrool{
+    -fx-background-color: #696969;
+}
+#vboxchat{
+    -fx-background-color: #696969;
+}
+.borderColor{
+    -fx-border-color: burlywood;
+}

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controler.Chat.Client">
+   <children>
+      <HBox prefHeight="700.0" prefWidth="500.0">
+         <children>
+            <VBox id="vboxprofile" prefHeight="700.0" prefWidth="180.0">
+               <children>
+                  <Pane id="titlepane" prefHeight="66.0" prefWidth="180.0">
+                     <children>
+                        <FlowPane prefHeight="66.0" prefWidth="180.0">
+                           <children>
+                              <ImageView fitHeight="66.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../image/logo_chat_lan.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Chat Lan">
+                                 <font>
+                                    <Font name="Segoe UI" size="25.0" />
+                                 </font>
+                                 <textFill>
+                                    <LinearGradient endX="0.5534351217837734" endY="0.5725190775995036">
+                                       <stops>
+                                          <Stop>
+                                             <color>
+                                                <Color red="0.9599999785423279" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="0.007680491551459294">
+                                             <color>
+                                                <Color green="1.0" blue="0.06666667014360428" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="1.0">
+                                             <color>
+                                                <Color red="1.0" green="0.949999988079071" />
+                                             </color>
+                                          </Stop>
+                                       </stops>
+                                    </LinearGradient>
+                                 </textFill>
+                                 <effect>
+                                    <Glow />
+                                 </effect>
+                              </Label>
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="47.0" prefWidth="180.0" styleClass="borderColor">
+                     <children>
+                        <HBox prefHeight="58.0" prefWidth="180.0">
+                           <children>
+                              <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../image/icons_online_2.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label text="Online">
+                                 <font>
+                                    <Font name="Segoe UI Italic" size="18.0" />
+                                 </font>
+                                 <textFill>
+                                    <LinearGradient endX="1.0" endY="1.0">
+                                       <stops>
+                                          <Stop>
+                                             <color>
+                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="0.47252747252747246">
+                                             <color>
+                                                <Color red="0.01666666753590107" green="1.0" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="1.0">
+                                             <color>
+                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                             </color>
+                                          </Stop>
+                                       </stops>
+                                    </LinearGradient>
+                                 </textFill>
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </Pane>
+                  <ScrollPane id="profilescroll" focusTraversable="false" hbarPolicy="NEVER" pannable="true" prefHeight="587.0" prefWidth="180.0" vbarPolicy="NEVER">
+                     <content>
+                        <VBox id="vboxscrool" fx:id="vboxProfile" focusTraversable="true" minHeight="578.0" minWidth="180.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+            <VBox prefHeight="700.0" prefWidth="320.0">
+               <children>
+                  <Pane id="profilepane" prefHeight="66.0" prefWidth="320.0">
+                     <children>
+                        <FlowPane prefHeight="66.0" prefWidth="320.0">
+                           <children>
+                              <ImageView fitHeight="66.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../image/person.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="userNameLabel" text="User Name ">
+                                 <font>
+                                    <Font name="Segoe UI" size="25.0" />
+                                 </font>
+                                 <effect>
+                                    <Glow />
+                                 </effect>
+                                 <textFill>
+                                    <LinearGradient endX="0.6297710360461519" endY="0.5763358860525466">
+                                       <stops>
+                                          <Stop>
+                                             <color>
+                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="0.01075268817204303">
+                                             <color>
+                                                <Color red="0.20000000298023224" green="1.0" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="1.0">
+                                             <color>
+                                                <Color red="0.9333333373069763" green="1.0" />
+                                             </color>
+                                          </Stop>
+                                       </stops>
+                                    </LinearGradient>
+                                 </textFill>
+                              </Label>
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </Pane>
+                  <ScrollPane id="chatscroll" focusTraversable="false" hbarPolicy="NEVER" pannable="true" prefHeight="569.0" prefWidth="320.0" vbarPolicy="NEVER">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <content>
+                        <VBox id="vboxchat" fx:id="vboxChat" minHeight="568.0" minWidth="318.0" styleClass="borderColor" />
+                     </content>
+                  </ScrollPane>
+                  <HBox prefHeight="30.0" prefWidth="320.0">
+                     <children>
+                        <TextArea id="chattextarea" fx:id="textAreaMsg" focusTraversable="false" prefHeight="30.0" prefWidth="250.0" wrapText="true">
+                           <HBox.margin>
+                              <Insets left="10.0" top="10.0" />
+                           </HBox.margin>
+                        </TextArea>
+                        <ImageView fx:id="sendImg" fitHeight="30.0" fitWidth="40.0" onMouseClicked="#sendSmg" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets left="15.0" top="15.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../../image/send.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
