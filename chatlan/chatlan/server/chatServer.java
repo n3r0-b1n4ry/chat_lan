@@ -42,6 +42,41 @@ public class chatServer {
 		}
 	}
 
+	class multicast extends Thread {
+		String msg, excludeuser;
+		Hashtable<String, String> userlist;
+
+		public multicast(String msg, Hashtable<String, String> userlist, String excludeuser) {
+			this.msg = msg;
+			this.userlist = userlist;
+			this.excludeuser = excludeuser;
+		}
+
+		public void run() {
+			Enumeration<String> e = this.userlist.keys();
+			while (e.hasMoreElements()) {
+				String key = e.nextElement();
+
+				if (key != this.excludeuser) {
+					try {
+//						send data to client
+						Socket connectionSocket = new Socket(this.userlist.get(key), 4567);
+						DataOutputStream signalToClient = new DataOutputStream(connectionSocket.getOutputStream());
+
+						signalToClient.writeBytes(this.msg);
+						signalToClient.flush();
+
+//						close connection to sender
+						connectionSocket.close();
+					} catch (Exception e1) {
+						e1.printStackTrace();
+						this.userlist.remove(key);
+					}
+				}
+			}
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	private void startProcess() {
 		String msg, ip, username;
@@ -72,7 +107,7 @@ public class chatServer {
 					username = (data.get("username")).toString();
 					ip = (connectionSocket.getRemoteSocketAddress().toString().replace("/", "")).split(":")[0];
 
-					if (userlist.containsKey(username) == false) {
+					if (userlist.containsKey(username) == false && userlist.contains(ip) == false) {
 						userlist.put(username, ip);
 						System.out.println(ip + " connect with nickname: " + username);
 						signalToClient.writeBytes("true");
@@ -110,27 +145,10 @@ public class chatServer {
 					content = respond.toJSONString();
 //					System.out.println(content);
 
-					Enumeration<String> e = userlist.keys();
-					while (e.hasMoreElements()) {
-						String key = e.nextElement();
+//					call multicast to send msg to all user in server
+					multicast session = new multicast(content, this.userlist, username);
+					session.start();
 
-						if (key != username) {
-							try {
-//								send data to client
-								connectionSocket = new Socket(this.userlist.get(key), 4567);
-								signalToClient = new DataOutputStream(connectionSocket.getOutputStream());
-
-								signalToClient.writeBytes(content);
-								signalToClient.flush();
-
-//								close connection to sender
-								connectionSocket.close();
-							} catch (Exception e1) {
-								e1.printStackTrace();
-								this.userlist.remove(key);
-							}
-						}
-					}
 					break;
 				default:
 					break;
