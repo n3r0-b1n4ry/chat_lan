@@ -1,4 +1,5 @@
 package Connect;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Hashtable;
@@ -27,6 +28,7 @@ public class chatClient {
 			this.recv = new recvThread();
 			this.send.start();
 			this.recv.start();
+
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -73,16 +75,13 @@ public class chatClient {
 		}
 	}
 
-	public boolean logout() {
+	public void logout() {
 		Socket socket;
 		try {
 			socket = new Socket(this.server_name, this.server_port);
-			System.out.println("successed");
 			this.send.sendData(socket, this.username, "logout", "");
-			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
 		}
 	}
 

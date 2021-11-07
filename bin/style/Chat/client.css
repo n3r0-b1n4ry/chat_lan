@@ -15,12 +15,10 @@
     -fx-control-inner-background: #696969;
     -fx-text-fill:white;
 }
-#vboxscrool{
-    -fx-background-color: #696969;
-}
 #vboxchat{
     -fx-background-color: #696969;
 }
-.borderColor{
+#borderPaneText{
     -fx-border-color: burlywood;
+    -fx-border-width: 1;
 }

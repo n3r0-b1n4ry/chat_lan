@@ -1,5 +1,6 @@
 package Controler.Chat;
 
+import Connect.chatClient;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -12,53 +13,56 @@ import javafx.scene.text.Font;
 
 public class Client {
 
-    @FXML
-    private ImageView sendImg;
-    @FXML
-    private TextArea textAreaMsg;
-    @FXML
-    private VBox vboxChat;
-    @FXML
-    public Label userNameLabel;
+	@FXML
+	private ImageView sendImg;
+	@FXML
+	private TextArea textAreaMsg;
+	@FXML
+	private VBox vboxChat;
+	@FXML
+	public Label userNameLabel;
 
-    String textSmgUser;
-    String textSmgClient;// main lay text nay add vao cho may client
+	String textSmgUser;
+	String textSmgClient;// main lay text nay add vao cho may client
+	String textUser;
 
-    @FXML
-    public void sendSmg(MouseEvent send) {
-        textSmgUser = textAreaMsg.getText();
+	public void setUerName(String name) {
+		userNameLabel.setText(name);
+	}
 
-        // ------create a label containing text: user-------
+	@FXML
+	public void sendSmg(MouseEvent send) {
+		textSmgUser = textAreaMsg.getText().toString();
 
-        Label textUser = new Label(textSmgUser);
-        textUser.setTextFill(Color.WHITE);
-        textUser.setFont(Font.font("tnr", 14));
-        textUser.setWrapText(true);
-        textUser.setPrefWidth(150);
-        textUser.setTranslateX(160);
-        textUser.setAlignment(Pos.TOP_RIGHT);
+		if (textSmgUser.isEmpty() == false) {
 
-        // ----add label to vbox chat-----
-        vboxChat.getChildren().addAll(textUser);
+			Label textUser = new Label(textSmgUser);
+			textUser.setTextFill(Color.WHITE);
+			textUser.setFont(Font.font("tnr", 14));
+			textUser.setWrapText(true);
+			textUser.setPrefWidth(200);
+			textUser.setTranslateX(295);
+			textUser.setAlignment(Pos.TOP_RIGHT);
 
-        // ---test chat client----
-        msgClient();
-    }
+			// ----add label to vbox chat-----
+			vboxChat.getChildren().addAll(textUser);
 
-    // ----- create a label containing text: client------
-    public void msgClient() {
-        textSmgClient = "hello";// test
-        Label textClient = new Label(textSmgClient);
-        textClient.setTextFill(Color.WHITE);
-        textClient.setFont(Font.font("tnr", 14));
-        textClient.setPrefWidth(150);
-        textClient.setWrapText(true);
-        // ----add text client to vbox chat----
-        vboxChat.getChildren().addAll(textClient);
-    }
+			// ---test chat client----
+			// msgClient();
+		}
 
-    public void setUerName(String name) {
-        userNameLabel.setText(name);
-    }
+	}
+
+	// ----- create a label containing text: client------
+	public void msgClient() {
+		textSmgClient = "hello";// test
+		Label textClient = new Label(textSmgClient);
+		textClient.setTextFill(Color.WHITE);
+		textClient.setFont(Font.font("tnr", 14));
+		textClient.setPrefWidth(150);
+		textClient.setWrapText(true);
+		// ----add text client to vbox chat----
+		vboxChat.getChildren().addAll(textClient);
+	}
 
 }
