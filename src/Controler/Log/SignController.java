@@ -1,19 +1,18 @@
 package Controler.Log;
 
 import java.io.IOException;
-
+import javafx.scene.Node;
 import Connect.chatClient;
 import Controler.Chat.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class SignController {
@@ -44,7 +43,7 @@ public class SignController {
             loader.setLocation(getClass().getResource("/Gui/Chat/Client.fxml"));
             parent = loader.load();
             parent.setId("backgroundSign");
-            guiChat = (Stage) ((Node) (event.getSource())).getScene().getWindow();
+            guiChat =(Stage) ((Node) (event.getSource())).getScene().getWindow();
             scene = new Scene(parent);
             scene.getStylesheets().add(getClass().getResource("/style/Chat/client.css").toExternalForm());
             guiChat.setScene(scene);
@@ -52,7 +51,14 @@ public class SignController {
             Client client = loader.getController();
             client.setUerName(userNameLog.getText().toString());
             //-------------
-            
+            chatClient userLog = new chatClient("127.0.0.1",1234,userNameLog.getText().toString());
+            if(userLog.createConnection()) {
+         	   userLog.login();
+         	   if(true) {
+         		   System.out.println("connection successed");
+         	   }
+            }
+    		
             
             
         }

@@ -46,10 +46,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ASUS/Desktop/projectTP/chat_lan-core/chat_lan-core/lib/json-simple-1.1.1.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/ASUS/Desktop/projectTP/chat_lan-core/chat_lan-core/lib/json-simple-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
