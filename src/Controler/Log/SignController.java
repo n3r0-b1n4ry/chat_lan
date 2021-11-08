@@ -63,6 +63,11 @@ public class SignController {
 			if (userLog.createConnection()) {
 				userLog.login();
 			}
+			try {
+				client.setSession(userLog);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
