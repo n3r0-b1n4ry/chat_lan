@@ -24,11 +24,7 @@ public class SignController {
 	private Button moveclient;
 	@FXML
 	public TextField userNameLog;
-
-	public void UserLog() {
-
-	}
-
+	
 	@FXML
 	public void clickLog(ActionEvent event) throws IOException {
 		if (userNameLog.getText().isEmpty()) {
