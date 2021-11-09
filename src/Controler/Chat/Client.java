@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class Client {
+public class Client extends Thread {
 	private chatClient chat;
 
 	@FXML
@@ -29,6 +29,7 @@ public class Client {
 	String textSmgUser;
 	String textSmgClient;// main lay text nay add vao cho may client
 	String textUser;
+	private Thread thread;
 
 	public void setUerName(String name) {
 		userNameLabel.setText(name);
@@ -57,9 +58,6 @@ public class Client {
 
 				// ----add label to vbox chat-----
 				vboxChat.getChildren().addAll(textUser);
-
-				// ---test chat client----
-				// msgClient();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -67,33 +65,73 @@ public class Client {
 		}
 	}
 
-	// ----- create a label containing text: client------
-	public void outMsg() {
-		
-			Hashtable<String, String> msg = this.chat.recvMsg();
-			if (msg.size() > 0) {
-				Enumeration<String> e = msg.keys();
+	public void start() {
+		if (thread == null) {
+			thread = new Thread(this);
+			thread.start();
+			while (true) {
+				try {
+					Hashtable<String, String> msg = this.chat.recvMsg();
+					if (msg.size() > 0) {
+						Enumeration<String> e = msg.keys();
 
-				while (e.hasMoreElements()) {
-					
-					String key = e.nextElement();
-					
-					Label textClient = new Label();
-					textClient.setText(key + ": " + msg.get(key));
-					
-					textClient.setTextFill(Color.WHITE);
-					textClient.setFont(Font.font("tnr", 14));
-					textClient.setPrefWidth(150);
-					textClient.setWrapText(true);
-					
-					// ----add text client to vbox chat----
-					
-					vboxChat.getChildren().addAll(textClient);
-					
+						while (e.hasMoreElements()) {
+
+							String key = e.nextElement();
+
+							Label textClient = new Label();
+							textClient.setText(key + ": " + msg.get(key));
+
+							textClient.setTextFill(Color.WHITE);
+							textClient.setFont(Font.font("tnr", 14));
+							textClient.setPrefWidth(150);
+							textClient.setWrapText(true);
+
+							// ----add text client to vbox chat----
+
+							vboxChat.getChildren().addAll(textClient);
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}
-		
-	
+	}
+
+	// public void run() {
+
+	// }
 
 }
+
+// @Override
+// public void run() {
+// while (true) {
+// try {
+// Hashtable<String, String> msg = this.chat.recvMsg();
+// if (msg.size() > 0) {
+// Enumeration<String> e = msg.keys();
+
+// while (e.hasMoreElements()) {
+
+// String key = e.nextElement();
+
+// Label textClient = new Label();
+// textClient.setText(key + ": " + msg.get(key));
+
+// textClient.setTextFill(Color.WHITE);
+// textClient.setFont(Font.font("tnr", 14));
+// textClient.setPrefWidth(150);
+// textClient.setWrapText(true);
+
+// // ----add text client to vbox chat----
+
+// vboxChat.getChildren().addAll(textClient);
+// }
+// }
+// } catch (Exception e) {
+// e.printStackTrace();
+// }
+// }
+// }
