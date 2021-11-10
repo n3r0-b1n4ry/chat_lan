@@ -1,11 +1,14 @@
-package Controler.Chat;
+package Controller.Chat;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
 
 import Connect.chatClient;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
@@ -25,6 +28,8 @@ public class Client extends Thread {
 	private VBox vboxChat;
 	@FXML
 	public Label userNameLabel;
+	@FXML
+	private Button logOut;
 
 	String textSmgUser;
 	String textSmgClient;// main lay text nay add vao cho may client
@@ -43,11 +48,9 @@ public class Client extends Thread {
 	public void sendSmg(MouseEvent send) {
 
 		textSmgUser = textAreaMsg.getText().toString();
-
 		if (textSmgUser.isEmpty() == false) {
 			try {
 				this.chat.sendMsg(textSmgUser);
-
 				Label textUser = new Label(textSmgUser);
 				textUser.setTextFill(Color.WHITE);
 				textUser.setFont(Font.font("tnr", 14));
@@ -57,6 +60,7 @@ public class Client extends Thread {
 				textUser.setAlignment(Pos.TOP_RIGHT);
 
 				// ----add label to vbox chat-----
+
 				vboxChat.getChildren().addAll(textUser);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -99,39 +103,9 @@ public class Client extends Thread {
 		}
 	}
 
-	// public void run() {
-
-	// }
-
+	@FXML
+	private void clickLogOut(ActionEvent event) {
+		chat.logout();
+		Platform.exit();
+	}
 }
-
-// @Override
-// public void run() {
-// while (true) {
-// try {
-// Hashtable<String, String> msg = this.chat.recvMsg();
-// if (msg.size() > 0) {
-// Enumeration<String> e = msg.keys();
-
-// while (e.hasMoreElements()) {
-
-// String key = e.nextElement();
-
-// Label textClient = new Label();
-// textClient.setText(key + ": " + msg.get(key));
-
-// textClient.setTextFill(Color.WHITE);
-// textClient.setFont(Font.font("tnr", 14));
-// textClient.setPrefWidth(150);
-// textClient.setWrapText(true);
-
-// // ----add text client to vbox chat----
-
-// vboxChat.getChildren().addAll(textClient);
-// }
-// }
-// } catch (Exception e) {
-// e.printStackTrace();
-// }
-// }
-// }
