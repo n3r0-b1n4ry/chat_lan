@@ -4,6 +4,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Hashtable;
 
+import Controller.Chat.Client;
+
 public class chatClient {
 	private static chatClient instance;
 	protected String username;
@@ -69,6 +71,8 @@ public class chatClient {
 		Socket socket;
 		try {
 			socket = new Socket(this.server_name, this.server_port);
+			Client client = new Client();
+			client.setSocket(socket);
 			return this.send.sendData(socket, this.username, "login", "");
 		} catch (Exception e) {
 			e.printStackTrace();
