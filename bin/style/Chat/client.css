@@ -24,3 +24,8 @@
     -fx-border-radius: 10;
     -fx-border-color: burlywood;
 }
+#buttonStartChat{
+    -fx-background-color: #696969;
+    -fx-border-radius: 10;
+    -fx-border-color: burlywood;
+}

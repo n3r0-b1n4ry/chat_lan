@@ -32,11 +32,12 @@ public class Client implements Runnable {
 	public Label userNameLabel;
 	@FXML
 	private Button logOut;
+	@FXML
+	private Button buttonStartChat;
 
 	String textSmgUser;
 	String textSmgClient;// main lay text nay add vao cho may client
 	String textUser;
-	private Thread thread;
 
 	public void setUerName(String name) {
 		userNameLabel.setText(name);
@@ -73,6 +74,13 @@ public class Client implements Runnable {
 			}
 
 		}
+	}
+
+	@FXML
+	public void clickStartChat(ActionEvent event) {
+		Client client = new Client();
+		Thread thread = new Thread(client);
+		thread.start();
 	}
 
 	@Override

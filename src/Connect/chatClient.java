@@ -7,7 +7,6 @@ import java.util.Hashtable;
 import Controller.Chat.Client;
 
 public class chatClient {
-	private static chatClient instance;
 	protected String username;
 	protected String server_name;
 	protected int server_port;
