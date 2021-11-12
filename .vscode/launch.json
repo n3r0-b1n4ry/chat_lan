@@ -6,10 +6,23 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
             "name": "Launch MainChatLan",
             "request": "launch",
-            "vmArgs": "--module-path C:/Users/tiend/Desktop/git/chat_lan/lib/javafx-sdk-17/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path C:/Users/ASUS/Desktop/clone/chat_lan/chat_lan/lib/javafx-sdk-17/lib --add-modules javafx.controls,javafx.fxml", 
             "mainClass": "Main.MainChatLan",
+            "projectName": "ChatLan"
+        },
+        {
+            "type": "java",
+            "name": "Launch Css2Bin",
+            "request": "launch",
+            "mainClass": "com.sun.javafx.css.parser.Css2Bin",
             "projectName": "ChatLan"
         }
     ]

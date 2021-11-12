@@ -3,7 +3,6 @@ package Controller.Chat;
 import java.net.Socket;
 import java.util.Enumeration;
 import java.util.Hashtable;
-
 import Connect.chatClient;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -32,8 +31,6 @@ public class Client implements Runnable {
 	public Label userNameLabel;
 	@FXML
 	private Button logOut;
-	@FXML
-	private Button buttonStartChat;
 
 	String textSmgUser;
 	String textSmgClient;// main lay text nay add vao cho may client
@@ -72,15 +69,7 @@ public class Client implements Runnable {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 		}
-	}
-
-	@FXML
-	public void clickStartChat(ActionEvent event) {
-		Client client = new Client();
-		Thread thread = new Thread(client);
-		thread.start();
 	}
 
 	@Override
@@ -154,5 +143,6 @@ public class Client implements Runnable {
 	private void clickLogOut(ActionEvent event) {
 		chat.logout();
 		Platform.exit();
+		System.exit(0);
 	}
 }
