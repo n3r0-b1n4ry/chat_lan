@@ -75,7 +75,7 @@ public class SignController {
 
 				Client client = loader.getController();
 				client.setUerName(userNameLog.getText().toString());
-
+				
 				// ---------log-----------
 				chatClient userLog = new chatClient(ipServer, 1234, userNameLog.getText().toString());
 				if (userLog.createConnection()) {
@@ -84,7 +84,7 @@ public class SignController {
 				}
 				try {
 					client.setSession(userLog);
-					
+					client.runRecv();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

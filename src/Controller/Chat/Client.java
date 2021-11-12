@@ -1,6 +1,5 @@
 package Controller.Chat;
 
-import java.net.Socket;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import Connect.chatClient;
@@ -17,9 +16,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class Client implements Runnable {
+public class Client {
 	private chatClient chat;
-	private Socket socket;
 
 	@FXML
 	private ImageView sendImg;
@@ -42,10 +40,6 @@ public class Client implements Runnable {
 
 	public void setSession(chatClient session) {
 		this.chat = session;
-	}
-
-	public void setSocket(Socket sk) {
-		this.socket = sk;
 	}
 
 	@FXML
@@ -72,12 +66,18 @@ public class Client implements Runnable {
 		}
 	}
 
-	@Override
-	public void run() {
-		while (true) {
-			try {
-				if (socket != null) {
-					Hashtable<String, String> msg = this.chat.recvMsg();
+	private class Recv extends Thread {
+
+		chatClient session;
+
+		public Recv(chatClient session) {
+			this.session = session;
+		}
+
+		public void run() {
+			while (true) {
+				try {
+					Hashtable<String, String> msg = this.session.recvMsg();
 					if (msg.size() > 0) {
 						Enumeration<String> e = msg.keys();
 
@@ -86,7 +86,9 @@ public class Client implements Runnable {
 							String key = e.nextElement();
 
 							Label textClient = new Label();
+							// textClient.setText("msg recv");
 							textClient.setText(key + ": " + msg.get(key));
+							System.out.println(key + ": " + msg.get(key));
 
 							textClient.setTextFill(Color.WHITE);
 							textClient.setFont(Font.font("tnr", 14));
@@ -98,46 +100,53 @@ public class Client implements Runnable {
 							vboxChat.getChildren().addAll(textClient);
 						}
 					}
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
 		}
 	}
 
-	// public void start() {
-	// if (thread == null) {
-	// thread = new Thread(this);
-	// thread.start();
-	// while (true) {
-	// try {
-	// Hashtable<String, String> msg = this.chat.recvMsg();
-	// if (msg.size() > 0) {
-	// Enumeration<String> e = msg.keys();
+	public void runRecv() {
+		// Runnable task = () -> {
+		// 	Platform.runLater(() -> {
+		// 		while (true) {
+		// 			try {
+		// 				Hashtable<String, String> msg = this.chat.recvMsg();
+		// 				if (msg.size() > 0) {
+		// 					Enumeration<String> e = msg.keys();
+	
+		// 					while (e.hasMoreElements()) {
+	
+		// 						String key = e.nextElement();
+	
+		// 						Label textClient = new Label();
+		// 						// textClient.setText("msg recv");
+		// 						textClient.setText(key + ": " + msg.get(key));
+		// 						System.out.println(key + ": " + msg.get(key));
+	
+		// 						textClient.setTextFill(Color.WHITE);
+		// 						textClient.setFont(Font.font("tnr", 14));
+		// 						textClient.setPrefWidth(150);
+		// 						textClient.setWrapText(true);
+	
+		// 						// ----add text client to vbox chat----
+	
+		// 						vboxChat.getChildren().addAll(textClient);
+		// 					}
+		// 				}
+		// 			} catch (Exception e) {
+		// 				e.printStackTrace();
+		// 			}
+		// 		}
+		// 	});
+		// };
 
-	// while (e.hasMoreElements()) {
-
-	// String key = e.nextElement();
-
-	// Label textClient = new Label();
-	// textClient.setText(key + ": " + msg.get(key));
-
-	// textClient.setTextFill(Color.WHITE);
-	// textClient.setFont(Font.font("tnr", 14));
-	// textClient.setPrefWidth(150);
-	// textClient.setWrapText(true);
-
-	// // ----add text client to vbox chat----
-
-	// vboxChat.getChildren().addAll(textClient);
-	// }
-	// }
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
-	// }
-	// }
+		// Thread thread = new Thread(task);
+		Recv thread = new Recv(this.chat);
+		thread.setDaemon(true);
+		thread.start();
+	}
 
 	@FXML
 	private void clickLogOut(ActionEvent event) {
