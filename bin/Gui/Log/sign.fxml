@@ -9,9 +9,9 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Log.SignController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Log.SignController">
    <children>
-      <Button id="buttonLog" fx:id="moveclient" layoutX="391.0" layoutY="84.0" mnemonicParsing="false" onAction="#clickLog" prefHeight="33.0" prefWidth="69.0" text="Log In">
+      <Button id="buttonLog" fx:id="moveclient" layoutX="387.0" layoutY="76.0" mnemonicParsing="false" onAction="#clickLog" prefHeight="24.0" prefWidth="70.0" text="Log In">
          <font>
             <Font name="Segoe UI Bold" size="15.0" />
          </font>
@@ -37,7 +37,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Label fx:id="test" layoutX="14.0" layoutY="89.0" text="User Name">
+      <Label fx:id="test" layoutX="14.0" layoutY="78.0" text="User Name">
          <font>
             <Font name="Segoe UI Bold Italic" size="20.0" />
          </font>
@@ -63,6 +63,6 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <TextField fx:id="userNameLog" layoutX="132.0" layoutY="87.0" prefHeight="26.0" prefWidth="218.0" />
+      <TextField id="userTextField" fx:id="userNameLog" layoutX="141.0" layoutY="73.0" prefHeight="34.0" prefWidth="218.0" />
    </children>
 </AnchorPane>

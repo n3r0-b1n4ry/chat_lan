@@ -1,5 +1,4 @@
 package Main;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +16,6 @@ public class MainChatLan extends Application {
         try {
 
             // -----set scene Sign----------
-
             Parent signParent = FXMLLoader.load(getClass().getResource("/Gui/Log/sign.fxml"));
             signParent.setId("signParent");
             Scene guiSign = new Scene(signParent);
@@ -27,11 +25,8 @@ public class MainChatLan extends Application {
             guiChatLan.setTitle("ChatLan");
             guiChatLan.setResizable(false);
             guiChatLan.show();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
 }

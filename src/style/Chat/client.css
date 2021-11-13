@@ -5,11 +5,10 @@
     -fx-border-width: 0.2;
     -fx-border-color: white;
 }
-
-#chattextarea{
+#chatTextArea{
     -fx-border-style: solid;
     -fx-border-color: burlywood;
-    -fx-control-inner-background: #696969;
+    -fx-control-inner-background: #292828;
     -fx-text-fill:white;
 }
 #vboxchat{

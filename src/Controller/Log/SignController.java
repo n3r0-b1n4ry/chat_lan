@@ -35,15 +35,13 @@ public class SignController {
 		String ipServer;
 
 		// -----------read ip server----------
-
 		File ipServerFile = new File("c:\\windows\\temp\\ipServer.txt");
 		BufferedReader readIpServer = new BufferedReader(new FileReader(ipServerFile));
 		ipServer = readIpServer.readLine();
 
 		if (ipServer == null) {
 
-			// -----ip server is null-----
-
+			// -----if: ip server is null-----
 			Alert error = new Alert(AlertType.ERROR);
 			String notification = "Error: IP Server is null" + "\n"
 					+ "Please enter the IP Server in the file 'ipServer.txt' according to the path 'c:\\windows\\temp'";
@@ -53,15 +51,15 @@ public class SignController {
 		} else {
 
 			if (userNameLog.getText().isEmpty()) {
-				// ----user name is null-----
 
+				// ----if: user name is null-----
 				Alert warning = new Alert(AlertType.WARNING);
 				warning.setHeaderText("Please enter user name");
 				warning.setTitle("Warning");
 				warning.show();
 			} else {
-				FXMLLoader loader = new FXMLLoader();
 
+				FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(getClass().getResource("/Gui/Chat/Client.fxml"));
 				parent = loader.load();
 				parent.setId("backgroundSign");
@@ -69,16 +67,16 @@ public class SignController {
 				scene = new Scene(parent);
 				scene.getStylesheets().add(getClass().getResource("/style/Chat/client.css").toExternalForm());
 				guiChat.setScene(scene);
-	
 
 				// ------- change user name from text field to user name of client---
-
 				Client client = loader.getController();
 				client.setUerName(userNameLog.getText().toString());
-				
+
 				// ---------log-----------
 				chatClient userLog = new chatClient(ipServer, 1234, userNameLog.getText().toString());
+
 				if (userLog.createConnection()) {
+
 					userLog.login();
 					readIpServer.close();
 				}
@@ -88,9 +86,7 @@ public class SignController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-
 			}
-
 		}
 	}
 }

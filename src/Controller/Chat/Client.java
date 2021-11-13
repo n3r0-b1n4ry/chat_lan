@@ -31,7 +31,6 @@ public class Client {
 	private Button logOut;
 
 	String textSmgUser;
-	String textSmgClient;// main lay text nay add vao cho may client
 	String textUser;
 
 	public void setUerName(String name) {
@@ -51,21 +50,25 @@ public class Client {
 				this.chat.sendMsg(textSmgUser);
 				Label textUser = new Label(textSmgUser);
 				textUser.setTextFill(Color.WHITE);
-				textUser.setFont(Font.font("tnr", 14));
+				textUser.setFont(Font.font("Arial", 14));
 				textUser.setWrapText(true);
 				textUser.setPrefWidth(200);
 				textUser.setTranslateX(295);
 				textUser.setAlignment(Pos.TOP_RIGHT);
 
 				// ----add label to vbox chat-----
+				vboxChat.getChildren().add(textUser);
 
-				vboxChat.getChildren().addAll(textUser);
+				// ----clear textarea----
+				textAreaMsg.clear();
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
+	// ------create a class Recv: update msg to UI--------
 	private class Recv extends Thread {
 
 		chatClient session;
@@ -80,24 +83,25 @@ public class Client {
 					Hashtable<String, String> msg = this.session.recvMsg();
 					if (msg.size() > 0) {
 						Enumeration<String> e = msg.keys();
-
 						while (e.hasMoreElements()) {
-
 							String key = e.nextElement();
+							if (key.equals(userNameLabel.getText())) {
+								break;
+							} else {
+								Label textClient = new Label();
 
-							Label textClient = new Label();
-							// textClient.setText("msg recv");
-							textClient.setText(key + ": " + msg.get(key));
-							System.out.println(key + ": " + msg.get(key));
+								// textClient.setText("msg recv");
+								textClient.setText(key + ": " + msg.get(key));
+								textClient.setTextFill(Color.WHITE);
+								textClient.setFont(Font.font("Arial", 14));
+								textClient.setPrefWidth(150);
+								textClient.setWrapText(true);
 
-							textClient.setTextFill(Color.WHITE);
-							textClient.setFont(Font.font("tnr", 14));
-							textClient.setPrefWidth(150);
-							textClient.setWrapText(true);
-
-							// ----add text client to vbox chat----
-
-							vboxChat.getChildren().addAll(textClient);
+								// ----add text client to vbox chat---
+								Platform.runLater(() -> {
+									vboxChat.getChildren().add(textClient);
+								});
+							}
 						}
 					}
 				} catch (Exception e) {
@@ -107,47 +111,14 @@ public class Client {
 		}
 	}
 
+	// ----create Thread (chatClient)--------
 	public void runRecv() {
-		// Runnable task = () -> {
-		// 	Platform.runLater(() -> {
-		// 		while (true) {
-		// 			try {
-		// 				Hashtable<String, String> msg = this.chat.recvMsg();
-		// 				if (msg.size() > 0) {
-		// 					Enumeration<String> e = msg.keys();
-	
-		// 					while (e.hasMoreElements()) {
-	
-		// 						String key = e.nextElement();
-	
-		// 						Label textClient = new Label();
-		// 						// textClient.setText("msg recv");
-		// 						textClient.setText(key + ": " + msg.get(key));
-		// 						System.out.println(key + ": " + msg.get(key));
-	
-		// 						textClient.setTextFill(Color.WHITE);
-		// 						textClient.setFont(Font.font("tnr", 14));
-		// 						textClient.setPrefWidth(150);
-		// 						textClient.setWrapText(true);
-	
-		// 						// ----add text client to vbox chat----
-	
-		// 						vboxChat.getChildren().addAll(textClient);
-		// 					}
-		// 				}
-		// 			} catch (Exception e) {
-		// 				e.printStackTrace();
-		// 			}
-		// 		}
-		// 	});
-		// };
-
-		// Thread thread = new Thread(task);
 		Recv thread = new Recv(this.chat);
 		thread.setDaemon(true);
 		thread.start();
 	}
 
+	// -----logout-----------
 	@FXML
 	private void clickLogOut(ActionEvent event) {
 		chat.logout();
