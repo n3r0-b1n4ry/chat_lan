@@ -16,7 +16,7 @@ Run *setup_chat_lan.exe* to setup something important (IP server,...).
 
 Usage
 ---
-Run chat_lan.exe and insert Username to connect to server.  
+Run *chat_lan.exe* and insert Username to connect to server.  
 
 Author
 ---
