@@ -83,6 +83,7 @@ public class SignController {
 				try {
 					client.setSession(userLog);
 					client.runRecv();
+					client.enter();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

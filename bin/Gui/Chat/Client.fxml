@@ -177,7 +177,7 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                      <content>
-                        <VBox id="vboxchat" fx:id="vboxChat" minHeight="578.0" minWidth="500.0" styleClass="borderColor" />
+                        <VBox id="vboxchat" fx:id="vboxChat" minHeight="578.0" minWidth="500.0" prefWidth="500.0" spacing="10.0" styleClass="borderColor" />
                      </content>
                   </ScrollPane>
                </children>

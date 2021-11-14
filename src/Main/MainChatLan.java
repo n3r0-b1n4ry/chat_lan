@@ -25,6 +25,7 @@ public class MainChatLan extends Application {
             guiChatLan.setTitle("ChatLan");
             guiChatLan.setResizable(false);
             guiChatLan.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

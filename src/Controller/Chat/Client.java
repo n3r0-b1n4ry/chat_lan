@@ -5,16 +5,23 @@ import java.util.Hashtable;
 import Connect.chatClient;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class Client {
 	private chatClient chat;
@@ -44,20 +51,53 @@ public class Client {
 	@FXML
 	public void sendSmg(MouseEvent send) {
 
+		send();
+	}
+
+	public void enter() {
+		textAreaMsg.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent ev) {
+				if (ev.getCode() == KeyCode.ENTER) {
+					textAreaMsg.setText(textAreaMsg.getText().trim());
+					System.out.println(textAreaMsg.getText());
+					send();
+				}
+			}
+		});
+		{
+		}
+	}
+
+	public void send() {
 		textSmgUser = textAreaMsg.getText().toString();
 		if (textSmgUser.isEmpty() == false) {
 			try {
 				this.chat.sendMsg(textSmgUser);
+
+				FlowPane paneSend = new FlowPane();
+				paneSend.setTranslateX(5);
+				// paneSend.setAlignment(Pos.TOP_RIGHT);
+				Label keyUser = new Label();
+				keyUser.setText(userNameLabel.getText().toString() + ": ");
+				keyUser.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+				keyUser.setTextFill(Color.WHITE);
+				paneSend.getChildren().add(keyUser);
+				
 				Label textUser = new Label(textSmgUser);
 				textUser.setTextFill(Color.WHITE);
 				textUser.setFont(Font.font("Arial", 14));
 				textUser.setWrapText(true);
-				textUser.setPrefWidth(200);
-				textUser.setTranslateX(295);
+				textUser.setMaxWidth(400);
 				textUser.setAlignment(Pos.TOP_RIGHT);
+				textUser.setPadding(new Insets(5));
+				textUser.setStyle("-fx-background-color: #696969; -fx-border-radius: 10;-fx-border-color: burlywood;");
+
+				paneSend.getChildren().add(textUser);
 
 				// ----add label to vbox chat-----
-				vboxChat.getChildren().add(textUser);
+				vboxChat.getChildren().add(paneSend);
 
 				// ----clear textarea----
 				textAreaMsg.clear();
@@ -66,6 +106,7 @@ public class Client {
 				e.printStackTrace();
 			}
 		}
+
 	}
 
 	// ------create a class Recv: update msg to UI--------
@@ -88,18 +129,32 @@ public class Client {
 							if (key.equals(userNameLabel.getText())) {
 								break;
 							} else {
-								Label textClient = new Label();
+								Pane paneMsg = new Pane();
+								paneMsg.setTranslateX(5);
 
-								// textClient.setText("msg recv");
-								textClient.setText(key + ": " + msg.get(key));
+								FlowPane flowPaneMsg = new FlowPane();
+								flowPaneMsg.setHgap(10);
+
+								Label keyName = new Label();
+								keyName.setText(key + ": ");
+								keyName.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+								keyName.setTextFill(Color.WHITE);
+								flowPaneMsg.getChildren().add(keyName);
+
+								Label textClient = new Label(msg.get(key));
 								textClient.setTextFill(Color.WHITE);
 								textClient.setFont(Font.font("Arial", 14));
-								textClient.setPrefWidth(150);
+								textClient.setMaxWidth(400);
 								textClient.setWrapText(true);
+								textClient.setPadding(new Insets(5));
+								textClient.setStyle(
+										"-fx-background-color: #696969; -fx-border-radius: 10;-fx-border-color: burlywood;");
+								flowPaneMsg.getChildren().add(textClient);
+								paneMsg.getChildren().add(flowPaneMsg);
 
 								// ----add text client to vbox chat---
 								Platform.runLater(() -> {
-									vboxChat.getChildren().add(textClient);
+									vboxChat.getChildren().add(paneMsg);
 								});
 							}
 						}
