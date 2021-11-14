@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 import org.json.simple.JSONObject;
@@ -36,7 +37,7 @@ public class sendThread extends Thread {
 				break;
 			case "message":
 				request.put("username", username);
-				request.put("content", Base64.getEncoder().encodeToString(data.getBytes()));
+				request.put("content", Base64.getEncoder().encodeToString(data.getBytes(StandardCharsets.UTF_8)));
 				break;
 			}
 
