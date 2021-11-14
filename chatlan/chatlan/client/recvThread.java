@@ -1,4 +1,4 @@
-package chatlan.client;
+package Connect;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -27,9 +27,8 @@ public class recvThread extends Thread {
 		JSONObject data;
 
 		try {
-//			create input stream for Socket
+			// create input stream for Socket
 			BufferedReader signalFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
 			String content = signalFromServer.readLine();
 			obj = parser.parse(content);
 			data = (JSONObject) obj;
