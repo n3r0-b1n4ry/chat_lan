@@ -19,4 +19,8 @@ Run *chat_lan.exe* and insert Username to connect to server.
 
 Author
 ---
-KMA AT16I
+n3r0
+Bảo Nguyễn
+c0w_18
+Phát Hồ
+Thanh Trần
